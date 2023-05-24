@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Hello {{session['first_name']}}, query your future??</h1>
+        <div>
+        <a href="/log"><button>Login</button></a>
+        <a href="/reg"><button>Register</button></a>
+        {% if 'user_id' in session%}
+        <a href="/dashboard"></a><button>Dashboard</button></a>
+        {% endif %}
+        </div>
+    </div>
+    <div>
+    <div>
+        <img src="{{ url_for('static', filename='images/Crystal-Ball-Image.png') }}">
+        {{session['in']}}
+    </div>
+    <form action="/create/fortune" method="POST">
+        {% for message in get_flashed_messages(category_filter=['reg'])%}
+            <p class="text-danger">{{message}}</p>
+            {% endfor %}
+        <label for="query">Your query:</label>
+        <input type="text" id="query" name="query">
+        <button type="submit">???</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<h1>Welcome, {{logged_user.first_name}}</h1>
+<p>All Fortunes:</p>
+    <table class="table table-dark mx-auto w-50 table-striped-columns mt-3">
+        <thead>
+            <tr>
+                <th>Query</th>
+                <th>Fortune</th>
+                <th>Posted by</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fortune in all_fortunes%}
+            <tr>
+            <td>{{fortune.content}}</td>
+            <td>{{fortune.f_response}}</td>
+            <td>{{fortune.creator.first_name}}</td>
+            <td>
+                <a href="/fortune/{{fortune.id}}/view">View</a>
+                {% if session ['user_id'] == recipe.user_id %}
+                <a href="/fortune/{{fortune.id}}/delete">Delete</a>
+                {% endif %}
+            </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/"><button>Query your Future?</button></a>
+    <a href="/users/logout"><button>Logout</button></a>
